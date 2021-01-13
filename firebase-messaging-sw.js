@@ -1,9 +1,21 @@
-importScripts('https://www.gstatic.com/firebasejs/3.7.2/firebase-app.js');
-importScripts('https://www.gstatic.com/firebasejs/3.7.2/firebase-messaging.js');
+importScripts('https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/8.2.2/firebase-messaging.js');
+importScripts('https://www.gstatic.com/firebasejs/8.2.2/firebase-analytics.js');
 
-firebase.initializeApp({
-  messagingSenderId: '448358493027'
-});
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyBNuNe299xTdXQ3w82c7obYg1glVW5_TXw",
+    authDomain: "webpush-7e61e.firebaseapp.com",
+    projectId: "webpush-7e61e",
+    storageBucket: "webpush-7e61e.appspot.com",
+    messagingSenderId: "292806384921",
+    appId: "1:292806384921:web:e4c67afb82fd538a1bf988",
+    measurementId: "G-8M0H86P37Y"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
 
 const messaging = firebase.messaging();
 
