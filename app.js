@@ -165,7 +165,7 @@ function getToken() {
         .then(function() {
             // Get Instance ID token. Initially this makes a network call, once retrieved
             // subsequent calls to getToken will return from cache.
-            messaging.getToken({vapidKey: "BIWOLsKThJ3v0BCCXXaRXjVD2Y8fxJYyFXTZQW6ua6d8uq1kIJzQPaOi4H9Yi1FI4_s6Y6j_b4k8rYx05T2cvPg"})
+            messaging.getToken({vapidKey: "BJVjDhuIz-vr1Ixs_3QTmsxmjcmBY1ZaoN_lP1neFC32Yfyi_EKtTeMlAQvQayJj8iOnRvKkiy9tiwpIlFC8v8I"})
                 .then(function(currentToken) {
 
                     if (currentToken) {
