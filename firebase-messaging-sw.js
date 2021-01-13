@@ -17,14 +17,22 @@ importScripts('https://www.gstatic.com/firebasejs/8.2.2/firebase-messaging.js');
 
 const messaging = firebase.messaging();
 
-// Customize notification handler
-messaging.setBackgroundMessageHandler(function(payload) {
-  console.log('Handling background message', payload);
+messaging.onMessage((payload) => {
+  console.log('Message received. ', payload);
+  // ...
+});
 
-  // Copy data object to get parameters in the click handler
-  payload.data.data = JSON.parse(JSON.stringify(payload.data));
+messaging.onBackgroundMessage(function(payload) {
+  console.log('[firebase-messaging-sw.js] Received background message ', payload);
+  // Customize notification here
+  const notificationTitle = payload.title;
+  const notificationOptions = {
+    body: payload.body,
+    icon: payload.icon
+  };
 
-  return self.registration.showNotification(payload.data.title, payload.data);
+  self.registration.showNotification(notificationTitle,
+    notificationOptions);
 });
 
 self.addEventListener('notificationclick', function(event) {
