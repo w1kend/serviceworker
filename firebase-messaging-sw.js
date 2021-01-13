@@ -17,11 +17,6 @@ importScripts('https://www.gstatic.com/firebasejs/8.2.2/firebase-messaging.js');
 
 const messaging = firebase.messaging();
 
-messaging.onMessage((payload) => {
-  console.log('Message received. ', payload);
-  // ...
-});
-
 self.addEventListener('notificationclick', function(event) {
   const target = event.notification.data.click_action || '/';
   event.notification.close();
