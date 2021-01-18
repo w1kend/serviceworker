@@ -92,8 +92,8 @@ if (
         info.show();
         info_message
             .text('')
-            .append('<strong>'+payload.data.title+'</strong>')
-            .append('<em>'+payload.data.body+'</em>')
+            .append('<strong>'+payload.notification.title+'</strong>')
+            .append('<em>'+payload.notification.body+'</em>')
         ;
 
         // register fake ServiceWorker for show notification on mobile devices
@@ -102,9 +102,9 @@ if (
             if (permission === 'granted') {
                 navigator.serviceWorker.ready.then(function(registration) {
                   // Copy data object to get parameters in the click handler
-                  payload.data.data = JSON.parse(JSON.stringify(payload.data));
+                  payload.notification = JSON.parse(JSON.stringify(payload.notification));
 
-                  registration.showNotification(payload.data.title, payload.data);
+                  registration.showNotification(payload.notification.title, payload.notification);
                 }).catch(function(error) {
                     // registration failed :(
                     showError('ServiceWorker registration failed', error);
@@ -201,7 +201,7 @@ function sendNotification(notification) {
                 body: JSON.stringify({
                     // Firebase loses 'image' from the notification.
                     // And you must see this: https://github.com/firebase/quickstart-js/issues/71
-                    data: notification,
+                    notification: notification,
                     to: currentToken
                 })
             }).then(function(response) {

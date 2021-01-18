@@ -12,9 +12,9 @@ messaging.setBackgroundMessageHandler(function(payload) {
   console.log('Handling background message', payload);
 
   // Copy data object to get parameters in the click handler
-  payload.data.data = JSON.parse(JSON.stringify(payload.data));
+  payload.notification = JSON.parse(JSON.stringify(payload.notification));
 
-  return self.registration.showNotification(payload.data.title, payload.data);
+  return self.registration.showNotification(payload.notification.title, payload.notification);
 });
 
 self.addEventListener('notificationclick', function(event) {
