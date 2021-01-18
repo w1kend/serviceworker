@@ -1,14 +1,6 @@
-  var firebaseConfig = {
-    apiKey: "AIzaSyBNuNe299xTdXQ3w82c7obYg1glVW5_TXw",
-    authDomain: "webpush-7e61e.firebaseapp.com",
-    projectId: "webpush-7e61e",
-    storageBucket: "webpush-7e61e.appspot.com",
-    messagingSenderId: "292806384921",
-    appId: "1:292806384921:web:e4c67afb82fd538a1bf988",
-    measurementId: "G-8M0H86P37Y"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+firebase.initializeApp({
+    messagingSenderId: '292806384921'
+});
 
 
 var bt_register = $('#register');
@@ -105,7 +97,7 @@ if (
         ;
 
         // register fake ServiceWorker for show notification on mobile devices
-        navigator.serviceWorker.register('serviceworker/firebase-messaging-sw.js', {scope:"serviceworker/firebase-cloud-messaging-push-scope"});
+        navigator.serviceWorker.register('/serviceworker/firebase-messaging-sw.js');
         Notification.requestPermission(function(permission) {
             if (permission === 'granted') {
                 navigator.serviceWorker.ready.then(function(registration) {
@@ -165,7 +157,7 @@ function getToken() {
         .then(function() {
             // Get Instance ID token. Initially this makes a network call, once retrieved
             // subsequent calls to getToken will return from cache.
-            messaging.getToken({vapidKey: "BJVjDhuIz-vr1Ixs_3QTmsxmjcmBY1ZaoN_lP1neFC32Yfyi_EKtTeMlAQvQayJj8iOnRvKkiy9tiwpIlFC8v8I"})
+            messaging.getToken()
                 .then(function(currentToken) {
 
                     if (currentToken) {
