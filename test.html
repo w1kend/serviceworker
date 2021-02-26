@@ -110,11 +110,13 @@ limitations under the License.
         showToken('loading...');
         // Get registration token. Initially this makes a network call, once retrieved
         // subsequent calls to getToken will return from cache.
-        navigator.serviceWorker.register('firebase-messaging-sw.js', 'firebase-cloud-messaging-push-scope').then(function (worker) {
+        let worker = '';
+        navigator.serviceWorker.register('/serviceworker/firebase-messaging-sw.js').then(function (sw) {
             console.log('worker registered');
-            messaging.useServiceWorker(worker);
+            console.log(sw);
+            worker = sw;
         });
-        messaging.getToken({vapidKey: 'BJVjDhuIz-vr1Ixs_3QTmsxmjcmBY1ZaoN_lP1neFC32Yfyi_EKtTeMlAQvQayJj8iOnRvKkiy9tiwpIlFC8v8I>'}).then((currentToken) => {
+        messaging.getToken({serviceWorkerRegistration: worker, vapidKey: 'BJVjDhuIz-vr1Ixs_3QTmsxmjcmBY1ZaoN_lP1neFC32Yfyi_EKtTeMlAQvQayJj8iOnRvKkiy9tiwpIlFC8v8I>'}).then((currentToken) => {
             if (currentToken) {
                 sendTokenToServer(currentToken);
                 updateUIForPushEnabled(currentToken);
