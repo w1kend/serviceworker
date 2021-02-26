@@ -99,7 +99,6 @@ limitations under the License.
     // - a message is received while the app has focus
     // - the user clicks on an app notification created by a service worker
     //   `messaging.onBackgroundMessage` handler.
-    navigator.serviceWorker.register('/serviceworker/firebase-messaging-sw.js');
     messaging.onMessage((payload) => {
         console.log('Message received. ', payload);
         // Update the UI to include the received message.
@@ -111,7 +110,8 @@ limitations under the License.
         showToken('loading...');
         // Get registration token. Initially this makes a network call, once retrieved
         // subsequent calls to getToken will return from cache.
-        messaging.getToken({vapidKey: 'BJVjDhuIz-vr1Ixs_3QTmsxmjcmBY1ZaoN_lP1neFC32Yfyi_EKtTeMlAQvQayJj8iOnRvKkiy9tiwpIlFC8v8I>'}).then((currentToken) => {
+        let workerRegistration = navigator.serviceWorker.register('/serviceworker/firebase-messaging-sw.js');
+        messaging.getToken({serviceWorkerRegistration: workerRegistration, vapidKey: 'BJVjDhuIz-vr1Ixs_3QTmsxmjcmBY1ZaoN_lP1neFC32Yfyi_EKtTeMlAQvQayJj8iOnRvKkiy9tiwpIlFC8v8I>'}).then((currentToken) => {
             if (currentToken) {
                 sendTokenToServer(currentToken);
                 updateUIForPushEnabled(currentToken);
