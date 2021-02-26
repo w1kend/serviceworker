@@ -115,6 +115,10 @@ limitations under the License.
             console.log('worker registered');
             console.log(sw);
             worker = sw;
+        }).catch(function (err) {
+            navigator.serviceWorker.getRegistration('/serviceworker/firebase-cloud-messaging-push-scope').then(function(reg) {
+               worker = reg;
+            });
         });
         messaging.getToken({serviceWorkerRegistration: worker, vapidKey: 'BJVjDhuIz-vr1Ixs_3QTmsxmjcmBY1ZaoN_lP1neFC32Yfyi_EKtTeMlAQvQayJj8iOnRvKkiy9tiwpIlFC8v8I>'}).then((currentToken) => {
             if (currentToken) {
