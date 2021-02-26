@@ -55,7 +55,7 @@ limitations under the License.
                          granted permission to notify. -->
                     <div id="permission_div" style="display: none;">
                         <h4>Needs Permission</h4>
-                        <p id="token"></p>
+                        <p id="token2"></p>
                         <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
                                 onclick="requestPermission()">Request Permission</button>
                     </div>
@@ -108,19 +108,8 @@ limitations under the License.
     function resetUI() {
         clearMessages();
         showToken('loading...');
-        // Get registration token. Initially this makes a network call, once retrieved
-        // subsequent calls to getToken will return from cache.
-        // let worker = '';
-        // navigator.serviceWorker.register('/serviceworker/firebase-messaging-sw.js', {scope: '/serviceworker/firebase-cloud-messaging-push-scope'}).then(function (sw) {
-        //     console.log('worker registered');
-        //     console.log(sw);
-        //     worker = sw;
-        // }).catch(function (err) {
-        //     navigator.serviceWorker.getRegistration('/serviceworker/firebase-cloud-messaging-push-scope').then(function(reg) {
-        //        worker = reg;
-        //     });
-        // });
-        messaging.getToken({vapidKey: 'BJVjDhuIz-vr1Ixs_3QTmsxmjcmBY1ZaoN_lP1neFC32Yfyi_EKtTeMlAQvQayJj8iOnRvKkiy9tiwpIlFC8v8I>'}).then((currentToken) => {
+
+        messaging.getToken({vapidKey: 'BJVjDhuIz-vr1Ixs_3QTmsxmjcmBY1ZaoN_lP1neFC32Yfyi_EKtTeMlAQvQayJj8iOnRvKkiy9tiwpIlFC8v8I'}).then((currentToken) => {
             if (currentToken) {
                 sendTokenToServer(currentToken);
                 updateUIForPushEnabled(currentToken);
