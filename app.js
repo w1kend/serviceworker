@@ -103,6 +103,7 @@ if (
                 navigator.serviceWorker.ready.then(function(registration) {
                   // Copy data object to get parameters in the click handler
                   payload.notification = JSON.parse(JSON.stringify(payload.notification));
+                  console.log(payload);
 
                   registration.showNotification(payload.notification.title, payload.notification);
                 }).catch(function(error) {
