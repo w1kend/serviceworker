@@ -110,7 +110,7 @@ limitations under the License.
         showToken('loading...');
         // Get registration token. Initially this makes a network call, once retrieved
         // subsequent calls to getToken will return from cache.
-        navigator.serviceWorker.register('/serviceworker/firebase-messaging-sw.js').then(function (worker) {
+        navigator.serviceWorker.register('firebase-messaging-sw.js', 'firebase-cloud-messaging-push-scope').then(function (worker) {
             console.log('worker registered');
             messaging.useServiceWorker(worker);
         });
