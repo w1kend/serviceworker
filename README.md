@@ -3,8 +3,6 @@ Test Firebase Cloud Messaging
 
 You can test usage on page: https://w1kend.github.io/serviceworker/
 
-<img src="ScreenRecord.gif" alt="" align="center">
-
 > Firebase loses the `image` from the notification.
 > You can fix the problem by specifying a `image` in `data`.
 > And you must see [this](https://github.com/firebase/quickstart-js/issues/71) issue.
