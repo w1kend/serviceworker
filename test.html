@@ -113,7 +113,7 @@ limitations under the License.
                     registration.showNotification(payload.notification.title, payload.notification);
                 }).catch(function(error) {
                     // registration failed :(
-                    showError('ServiceWorker registration failed', error);
+                    console.log('ServiceWorker registration failed ', error);
                 });
             }
         });
