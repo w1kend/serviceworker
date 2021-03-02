@@ -99,10 +99,26 @@ limitations under the License.
     // - a message is received while the app has focus
     // - the user clicks on an app notification created by a service worker
     //   `messaging.onBackgroundMessage` handler.
-    messaging.onMessage((payload) => {
-        console.log('Message received. ', payload);
-        // Update the UI to include the received message.
-        appendMessage(payload);
+    messaging.onMessage(function(payload) {
+        console.log('Message received', payload);
+
+        // register fake ServiceWorker for show notification on mobile devices
+        navigator.serviceWorker.register('/serviceworker/firebase-messaging-sw.js');
+        Notification.requestPermission(function(permission) {
+            if (permission === 'granted') {
+                navigator.serviceWorker.ready.then(function(registration) {
+                    // Copy data object to get parameters in the click handler
+                    payload.notification = JSON.parse(JSON.stringify(payload.notification));
+
+                    registration.showNotification(payload.notification.title, payload.notification);
+                }).catch(function(error) {
+                    // registration failed :(
+                    showError('ServiceWorker registration failed', error);
+                });
+            }
+        });
+
+        appendMessage(payload)
     });
 
     function resetUI() {
