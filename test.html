@@ -105,8 +105,10 @@ limitations under the License.
         // register fake ServiceWorker for show notification on mobile devices
         navigator.serviceWorker.register('/serviceworker/firebase-messaging-sw.js');
         Notification.requestPermission(function(permission) {
+            console.log(permission);
             if (permission === 'granted') {
                 navigator.serviceWorker.ready.then(function(registration) {
+                    console.log(registration);
                     // Copy data object to get parameters in the click handler
                     payload.notification = JSON.parse(JSON.stringify(payload.notification));
 
