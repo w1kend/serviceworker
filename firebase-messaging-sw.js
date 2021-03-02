@@ -16,16 +16,15 @@ firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 
 messaging.setBackgroundMessageHandler(function(payload) {
-  console.log('Handling background message', payload);
-
   // Copy data object to get parameters in the click handler
   payload.notification = JSON.parse(JSON.stringify(payload.notification));
+  console.log(payload)
 
   return self.registration.showNotification(payload.notification.title, payload.notification);
 });
 
 self.addEventListener('notificationclick', function(event) {
-  const target = event.notification.data.click_action || '/';
+  const target = event.notification.data.url || '/';
   event.notification.close();
 
   // This looks to see if the current is already open and focuses if it is
